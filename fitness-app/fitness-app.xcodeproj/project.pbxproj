@@ -9,21 +9,23 @@
 /* Begin PBXBuildFile section */
 		AACD52F124E960E900B49C08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F024E960E900B49C08 /* AppDelegate.swift */; };
 		AACD52F324E960E900B49C08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F224E960E900B49C08 /* SceneDelegate.swift */; };
-		AACD52F524E960E900B49C08 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F424E960E900B49C08 /* ViewController.swift */; };
+		AACD52F524E960E900B49C08 /* BmiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F424E960E900B49C08 /* BmiViewController.swift */; };
 		AACD52F824E960E900B49C08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACD52F624E960E900B49C08 /* Main.storyboard */; };
 		AACD52FA24E960EC00B49C08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AACD52F924E960EC00B49C08 /* Assets.xcassets */; };
 		AACD52FD24E960EC00B49C08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACD52FB24E960EC00B49C08 /* LaunchScreen.storyboard */; };
+		AACD530524E987E500B49C08 /* bmiCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD530424E987E500B49C08 /* bmiCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AACD52ED24E960E900B49C08 /* fitness-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fitness-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACD52F024E960E900B49C08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AACD52F224E960E900B49C08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AACD52F424E960E900B49C08 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AACD52F424E960E900B49C08 /* BmiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmiViewController.swift; sourceTree = "<group>"; };
 		AACD52F724E960E900B49C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AACD52F924E960EC00B49C08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AACD52FC24E960EC00B49C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AACD52FE24E960EC00B49C08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AACD530424E987E500B49C08 /* bmiCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bmiCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +60,12 @@
 			children = (
 				AACD52F024E960E900B49C08 /* AppDelegate.swift */,
 				AACD52F224E960E900B49C08 /* SceneDelegate.swift */,
-				AACD52F424E960E900B49C08 /* ViewController.swift */,
+				AACD52F424E960E900B49C08 /* BmiViewController.swift */,
 				AACD52F624E960E900B49C08 /* Main.storyboard */,
 				AACD52F924E960EC00B49C08 /* Assets.xcassets */,
 				AACD52FB24E960EC00B49C08 /* LaunchScreen.storyboard */,
 				AACD52FE24E960EC00B49C08 /* Info.plist */,
+				AACD530424E987E500B49C08 /* bmiCalculator.swift */,
 			);
 			path = "fitness-app";
 			sourceTree = "<group>";
@@ -138,7 +141,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACD52F524E960E900B49C08 /* ViewController.swift in Sources */,
+				AACD530524E987E500B49C08 /* bmiCalculator.swift in Sources */,
+				AACD52F524E960E900B49C08 /* BmiViewController.swift in Sources */,
 				AACD52F124E960E900B49C08 /* AppDelegate.swift in Sources */,
 				AACD52F324E960E900B49C08 /* SceneDelegate.swift in Sources */,
 			);
@@ -287,6 +291,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R8D3TFCC85;
 				INFOPLIST_FILE = "fitness-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +310,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R8D3TFCC85;
 				INFOPLIST_FILE = "fitness-app/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
