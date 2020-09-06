@@ -30,14 +30,4 @@ func ftToMeters(ftVlaue feet:Double, inchesValue inches:Double) -> Double {
     let result = inchesToMeters(valueToConvert: totalInch)
     return result
 }
-    
-    
-    
-func bmiCalc(weight:Double, height:Double) -> Double {
-    let bmi = weight / (height*height)
-    return round((100*bmi))/100
-    }
-    
-    
-    
 }

@@ -7,16 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA14CBAE2505083E006E07D5 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA14CBAD2505083E006E07D5 /* Calculator.swift */; };
+		AA7251A225042F5C001C2138 /* BmrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7251A125042F5C001C2138 /* BmrViewController.swift */; };
+		AA7251A72504306B001C2138 /* TdeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7251A62504306B001C2138 /* TdeeViewController.swift */; };
 		AACD52F124E960E900B49C08 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F024E960E900B49C08 /* AppDelegate.swift */; };
 		AACD52F324E960E900B49C08 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F224E960E900B49C08 /* SceneDelegate.swift */; };
 		AACD52F524E960E900B49C08 /* BmiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD52F424E960E900B49C08 /* BmiViewController.swift */; };
 		AACD52F824E960E900B49C08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACD52F624E960E900B49C08 /* Main.storyboard */; };
 		AACD52FA24E960EC00B49C08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AACD52F924E960EC00B49C08 /* Assets.xcassets */; };
 		AACD52FD24E960EC00B49C08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AACD52FB24E960EC00B49C08 /* LaunchScreen.storyboard */; };
-		AACD530524E987E500B49C08 /* bmiCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD530424E987E500B49C08 /* bmiCalculator.swift */; };
+		AACD530524E987E500B49C08 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AACD530424E987E500B49C08 /* Converter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA14CBAD2505083E006E07D5 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		AA7251A125042F5C001C2138 /* BmrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmrViewController.swift; sourceTree = "<group>"; };
+		AA7251A62504306B001C2138 /* TdeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TdeeViewController.swift; sourceTree = "<group>"; };
 		AACD52ED24E960E900B49C08 /* fitness-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fitness-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AACD52F024E960E900B49C08 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AACD52F224E960E900B49C08 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -25,7 +31,7 @@
 		AACD52F924E960EC00B49C08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AACD52FC24E960EC00B49C08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AACD52FE24E960EC00B49C08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AACD530424E987E500B49C08 /* bmiCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bmiCalculator.swift; sourceTree = "<group>"; };
+		AACD530424E987E500B49C08 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +45,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA7251A325042F65001C2138 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				AACD52FB24E960EC00B49C08 /* LaunchScreen.storyboard */,
+				AACD52F624E960E900B49C08 /* Main.storyboard */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		AA7251A425042F6C001C2138 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				AACD530424E987E500B49C08 /* Converter.swift */,
+				AA14CBAD2505083E006E07D5 /* Calculator.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		AA7251A525042F82001C2138 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AACD52F424E960E900B49C08 /* BmiViewController.swift */,
+				AA7251A125042F5C001C2138 /* BmrViewController.swift */,
+				AA7251A62504306B001C2138 /* TdeeViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
 		AACD52E424E960E900B49C08 = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +92,13 @@
 		AACD52EF24E960E900B49C08 /* fitness-app */ = {
 			isa = PBXGroup;
 			children = (
+				AA7251A525042F82001C2138 /* controllers */,
 				AACD52F024E960E900B49C08 /* AppDelegate.swift */,
 				AACD52F224E960E900B49C08 /* SceneDelegate.swift */,
-				AACD52F424E960E900B49C08 /* BmiViewController.swift */,
-				AACD52F624E960E900B49C08 /* Main.storyboard */,
+				AA7251A425042F6C001C2138 /* model */,
+				AA7251A325042F65001C2138 /* views */,
 				AACD52F924E960EC00B49C08 /* Assets.xcassets */,
-				AACD52FB24E960EC00B49C08 /* LaunchScreen.storyboard */,
 				AACD52FE24E960EC00B49C08 /* Info.plist */,
-				AACD530424E987E500B49C08 /* bmiCalculator.swift */,
 			);
 			path = "fitness-app";
 			sourceTree = "<group>";
@@ -141,9 +174,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACD530524E987E500B49C08 /* bmiCalculator.swift in Sources */,
+				AA7251A72504306B001C2138 /* TdeeViewController.swift in Sources */,
+				AACD530524E987E500B49C08 /* Converter.swift in Sources */,
+				AA14CBAE2505083E006E07D5 /* Calculator.swift in Sources */,
 				AACD52F524E960E900B49C08 /* BmiViewController.swift in Sources */,
 				AACD52F124E960E900B49C08 /* AppDelegate.swift in Sources */,
+				AA7251A225042F5C001C2138 /* BmrViewController.swift in Sources */,
 				AACD52F324E960E900B49C08 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
