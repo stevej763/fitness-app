@@ -11,10 +11,9 @@ import UIKit
 class BmiViewController: UIViewController {
 
     let converter = Converter()
-    let calculator = Calculator()
+    var calculator = Calculator()
     
     @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var bmiResultLabel: UILabel!
     @IBOutlet weak var heightUnits: UISegmentedControl!
     @IBOutlet weak var weightUnits: UISegmentedControl!
     @IBOutlet weak var heightValue: UITextField!
@@ -57,23 +56,23 @@ class BmiViewController: UIViewController {
                             //calculate bmi using feet and kg
                             case "Kg":
                                 let bmi = calculator.bmiCalc(weight: Double(weightValue.text!)!, height: Double(heightInMeters))
-                                bmiResultLabel.isHidden = false
-                                bmiResultLabel.text = "Your BMI is: \(bmi)"
                                 self.view.endEditing(true)
+                                calculator.bmi = String(bmi)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             //calculate bmi using feet and Stone
                             case "Stone":
                                 let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
                                 let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters)
-                                bmiResultLabel.isHidden = false
-                                bmiResultLabel.text = "Your BMI is: \(bmi)"
                                 self.view.endEditing(true)
+                                calculator.bmi = String(bmi)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             //calculate bmi using feet and lbs
                             case "Lbs":
                                 let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
                                 let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters)
-                                bmiResultLabel.isHidden = false
-                                bmiResultLabel.text = "Your BMI is: \(bmi)"
                                 self.view.endEditing(true)
+                                calculator.bmi = String(bmi)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             default:
                                 print("There was an error")
                                 
@@ -92,23 +91,23 @@ class BmiViewController: UIViewController {
                 //calculate bmi using meters and kg
                 case "Kg":
                     let bmi = calculator.bmiCalc(weight: Double(weightValue.text!)!, height: heightInMeters!)
-                    bmiResultLabel.isHidden = false
-                    bmiResultLabel.text = "Your BMI is: \(bmi)"
                     self.view.endEditing(true)
+                    calculator.bmi = String(bmi)
+                    performSegue(withIdentifier: "goToResult", sender: self)
                 //calculate bmi using meters and Stone
                 case "Stone":
                     let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
                     let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters!)
-                    bmiResultLabel.isHidden = false
-                    bmiResultLabel.text = "Your BMI is: \(bmi)"
-                 self.view.endEditing(true)
+                    self.view.endEditing(true)
+                    calculator.bmi = String(bmi)
+                    performSegue(withIdentifier: "goToResult", sender: self)
                 //calculate bmi using meters and lbs
                 case "Lbs":
                     let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
                     let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters!)
-                    bmiResultLabel.isHidden = false
-                    bmiResultLabel.text = "Your BMI is: \(bmi)"
                     self.view.endEditing(true)
+                    calculator.bmi = String(bmi)
+                    performSegue(withIdentifier: "goToResult", sender: self)
                 default:
                     print("There was an error")
             }
@@ -157,7 +156,7 @@ class BmiViewController: UIViewController {
             weightValue.text = ""
             stoneValueLabel.isHidden = false
             stoneValue.isHidden = false
-            stoneValue.text = "0"
+            stoneValue.text = ""
             stoneValue.placeholder = "3"
             weightUnitsLabel.text = "Lbs"
         }
@@ -180,6 +179,15 @@ class BmiViewController: UIViewController {
     
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.results = calculator.bmi
+        }
+    }
+    
+    
+    
     fileprivate func uiChanges() {
         // Do any additional setup after loading the view.
         self.view.backgroundColor = UIColor(named: "blue1")
@@ -195,7 +203,6 @@ class BmiViewController: UIViewController {
         stoneValue.isHidden = true
         feetValueLabel.isHidden = true
         ftValue.isHidden = true
-        bmiResultLabel.isHidden = true
         heightUnitsLabel.text = heightUnits.titleForSegment(at: heightUnits.selectedSegmentIndex)
         weightUnitsLabel.text = weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex)
     }

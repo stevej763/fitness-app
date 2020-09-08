@@ -11,7 +11,7 @@ import UIKit
 class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
    
     let converter = Converter()
-    let calculator = Calculator()
+    var calculator = Calculator()
     
     
     
@@ -136,8 +136,9 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                             //calculate bmi using feet and kg
                             case "Kg":
                                 let tdee = calculator.tdeeCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                print(tdee)
                                 self.view.endEditing(true)
+                                calculator.tdee = String(tdee)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             //calculate bmi using feet and Stone
                             case "Stone":
                                 if stoneValue.text == "" {
@@ -145,17 +146,16 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                                 }
                                 let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
                                 let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                print(tdee)
-                                
-                                
                                 self.view.endEditing(true)
-                            
+                                calculator.tdee = String(tdee)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             //calculate bmi using feet and lbs
                             case "Lbs":
                                 let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
                                 let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                print(tdee)
                                 self.view.endEditing(true)
+                                calculator.tdee = String(tdee)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             default:
                                 print("There was an error")
                                 
@@ -175,25 +175,26 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                             //calculate bmi using feet and kg
                             case "Kg":
                                 let tdee = calculator.tdeeCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                print(tdee)
                                 self.view.endEditing(true)
+                                calculator.tdee = String(tdee)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             //calculate bmi using feet and Stone
                             case "Stone":
                                 if stoneValue.text == "" {
                                     stoneValue.text = "0"
                                 }
                                 let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                print(weightInKg)
                                 let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                print(tdee)
                                 self.view.endEditing(true)
-                            
+                                calculator.tdee = String(tdee)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             //calculate bmi using feet and lbs
                             case "Lbs":
                                 let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
                                 let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                print(tdee)
                                 self.view.endEditing(true)
+                                calculator.tdee = String(tdee)
+                                performSegue(withIdentifier: "goToResult", sender: self)
                             default:
                                 print("There was an error")
                                 
@@ -209,16 +210,6 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK:- picker methods
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -232,6 +223,14 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         return activityOptions[row]
     }
     
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.results = calculator.tdee
+        }
+    }
     
     
     fileprivate func viewDefaults() {

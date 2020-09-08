@@ -10,6 +10,9 @@ import Foundation
 
 struct Calculator{
     
+    var bmi: String?
+    var bmr: String?
+    var tdee: String?
     
     func bmiCalc(weight:Double, height:Double) -> Double {
     let bmi = weight / (height*height)

@@ -12,7 +12,7 @@ class BmrViewController: UIViewController {
 
     
     let converter = Converter()
-    let calculator = Calculator()
+    var calculator = Calculator()
     
     @IBOutlet weak var genderValue: UISegmentedControl!
     @IBOutlet weak var ageValue: UITextField!
@@ -108,23 +108,27 @@ class BmrViewController: UIViewController {
                                     let bmr = calculator.bmrCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!)
                                     print(bmr)
                                     self.view.endEditing(true)
+                                    calculator.bmr = String(bmr)
+                                    performSegue(withIdentifier: "goToResult", sender: self)
                                 //calculate bmi using feet and Stone
                                 case "Stone":
                                     if stoneValue.text == "" {
                                         stoneValue.text = "0"
                                     }
                                     let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                    print(weightInKg)
                                     let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    print(bmr)
                                     self.view.endEditing(true)
+                                    calculator.bmr = String(bmr)
+                                    performSegue(withIdentifier: "goToResult", sender: self)
+                                    
                                 
                                 //calculate bmi using feet and lbs
                                 case "Lbs":
                                     let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
                                     let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    print(bmr)
                                     self.view.endEditing(true)
+                                    calculator.bmr = String(bmr)
+                                    performSegue(withIdentifier: "goToResult", sender: self)
                                 default:
                                     print("There was an error")
                                     
@@ -144,25 +148,26 @@ class BmrViewController: UIViewController {
                                 //calculate bmi using feet and kg
                                 case "Kg":
                                     let bmr = calculator.bmrCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    print(bmr)
                                     self.view.endEditing(true)
-                                //calculate bmi using feet and Stone
+                                    calculator.bmr = String(bmr)
+                                    performSegue(withIdentifier: "goToResult", sender: self)
+                            //calculate bmi using feet and Stone
                                 case "Stone":
                                     if stoneValue.text == "" {
                                         stoneValue.text = "0"
                                     }
                                     let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                    print(weightInKg)
                                     let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    print(bmr)
                                     self.view.endEditing(true)
-                                
+                                    calculator.bmr = String(bmr)
+                                    performSegue(withIdentifier: "goToResult", sender: self)
                                 //calculate bmi using feet and lbs
                                 case "Lbs":
                                     let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
                                     let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    print(bmr)
                                     self.view.endEditing(true)
+                                    calculator.bmr = String(bmr)
+                                    performSegue(withIdentifier: "goToResult", sender: self)
                                 default:
                                     print("There was an error")
                                     
@@ -179,7 +184,12 @@ class BmrViewController: UIViewController {
         }//end of calculateButtonPressed
     
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.results = calculator.bmr
+        }
+    }
     
     
     
