@@ -11,12 +11,23 @@ import UIKit
 class ResultsViewController: UIViewController {
 
     @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet weak var resultsBackgroundView: UIView!
+    @IBOutlet weak var senderLabel: UILabel!
+    @IBOutlet weak var adviceLabel: UILabel!
     
-    var results: String?
+    var results: Results?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resultLabel.text = results
+        resultLabel.text = results?.value
+        senderLabel.text = results?.sender
+        adviceLabel.text = results?.advice
+        
+        resultsBackgroundView.layer.backgroundColor = results?.colour.cgColor
+        
+        resultsBackgroundView.layer.borderWidth = 5
+        resultsBackgroundView.layer.borderColor = UIColor(named: "text-input")?.cgColor
+        resultsBackgroundView.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
     }
     

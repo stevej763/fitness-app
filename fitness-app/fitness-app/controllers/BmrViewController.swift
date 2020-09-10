@@ -14,6 +14,7 @@ class BmrViewController: UIViewController {
     let converter = Converter()
     var calculator = Calculator()
     
+    @IBOutlet weak var titleBackgroundView: UIView!
     @IBOutlet weak var genderValue: UISegmentedControl!
     @IBOutlet weak var ageValue: UITextField!
     @IBOutlet weak var heightUnitsSelector: UISegmentedControl!
@@ -38,7 +39,12 @@ class BmrViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "blue2")
         viewDefaults()
+        
+        
         calculateButton.layer.cornerRadius = 10
+        titleBackgroundView.layer.cornerRadius = 10
+        
+        
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
     }
@@ -105,30 +111,34 @@ class BmrViewController: UIViewController {
                             switch userWeightUnits {
                                 //calculate bmi using feet and kg
                                 case "Kg":
-                                    let bmr = calculator.bmrCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    print(bmr)
-                                    self.view.endEditing(true)
-                                    calculator.bmr = String(bmr)
+                                    if weightValue.text != "" {
+                                    calculator.bmrCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!)
                                     performSegue(withIdentifier: "goToResult", sender: self)
+                                }
+                                    else {
+                                    Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                                }
                                 //calculate bmi using feet and Stone
                                 case "Stone":
-                                    if stoneValue.text == "" {
-                                        stoneValue.text = "0"
-                                    }
+                                   if weightValue.text != "" && stoneValue.text != "" {
                                     let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                    let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    self.view.endEditing(true)
-                                    calculator.bmr = String(bmr)
+                                    calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
                                     performSegue(withIdentifier: "goToResult", sender: self)
-                                    
+                                   } else {
+                                    Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                                }
                                 
                                 //calculate bmi using feet and lbs
                                 case "Lbs":
+                                    if weightValue.text != "" {
                                     let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
-                                    let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    self.view.endEditing(true)
-                                    calculator.bmr = String(bmr)
+                                    calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
                                     performSegue(withIdentifier: "goToResult", sender: self)
+                                }
+                                    else {
+                                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                                                                   
+                                }
                                 default:
                                     print("There was an error")
                                     
@@ -147,35 +157,41 @@ class BmrViewController: UIViewController {
                             switch userWeightUnits {
                                 //calculate bmi using feet and kg
                                 case "Kg":
-                                    let bmr = calculator.bmrCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    self.view.endEditing(true)
-                                    calculator.bmr = String(bmr)
+                                    if weightValue.text != "" {
+                                    calculator.bmrCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!)
                                     performSegue(withIdentifier: "goToResult", sender: self)
+                                }
+                                    else {
+                                       Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                                }
                             //calculate bmi using feet and Stone
                                 case "Stone":
-                                    if stoneValue.text == "" {
-                                        stoneValue.text = "0"
-                                    }
+                                    if weightValue.text != "" && stoneValue.text != "" {
                                     let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                    let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    self.view.endEditing(true)
-                                    calculator.bmr = String(bmr)
+                                    calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
                                     performSegue(withIdentifier: "goToResult", sender: self)
+                                }
+                                    else {
+                                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                                                        
+                                }
                                 //calculate bmi using feet and lbs
                                 case "Lbs":
+                                    if weightValue.text != "" {
                                     let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
-                                    let bmr = calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
-                                    self.view.endEditing(true)
-                                    calculator.bmr = String(bmr)
+                                    calculator.bmrCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!)
                                     performSegue(withIdentifier: "goToResult", sender: self)
+                                    } else {
+                                         Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                                }
                                 default:
-                                    print("There was an error")
+                                     Alert.basicAlert(on: self, with: "Error", message: "There was an error with the values given")
                                     
                             }
                         }
                         else {
                             //add error alert  box here
-                            print("blank box")
+                            Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
                 }
                 
 
@@ -187,7 +203,7 @@ class BmrViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
             let destinationVC = segue.destination as! ResultsViewController
-            destinationVC.results = calculator.bmr
+            destinationVC.results = calculator.result
         }
     }
     

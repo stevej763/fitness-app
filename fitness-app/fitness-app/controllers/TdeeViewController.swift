@@ -14,7 +14,8 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     var calculator = Calculator()
     
     
-    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleBackgroundView: UIView!
     @IBOutlet weak var genderValue: UISegmentedControl!
     @IBOutlet weak var ageValue: UITextField!
     @IBOutlet weak var heightUnitsSelector: UISegmentedControl!
@@ -39,9 +40,9 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        titleBackgroundView.layer.cornerRadius = 10
         calculateButton.layer.cornerRadius = 10
-        
+        activityLevelPicker.layer.cornerRadius = 10
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
        
@@ -135,35 +136,38 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                         switch userWeightUnits {
                             //calculate bmi using feet and kg
                             case "Kg":
-                                let tdee = calculator.tdeeCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                self.view.endEditing(true)
-                                calculator.tdee = String(tdee)
+                                 if weightValue.text != "" {
+                                calculator.tdeeCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
                                 performSegue(withIdentifier: "goToResult", sender: self)
+                                 } else {
+                                    Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                            }
                             //calculate bmi using feet and Stone
                             case "Stone":
-                                if stoneValue.text == "" {
-                                    stoneValue.text = "0"
-                                }
+                                if weightValue.text != "" && stoneValue.text != "" {
                                 let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                self.view.endEditing(true)
-                                calculator.tdee = String(tdee)
+                                calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
                                 performSegue(withIdentifier: "goToResult", sender: self)
+                                } else {
+                                    Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                            }
                             //calculate bmi using feet and lbs
                             case "Lbs":
+                                 if weightValue.text != "" {
                                 let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
-                                let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                self.view.endEditing(true)
-                                calculator.tdee = String(tdee)
+                                calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
                                 performSegue(withIdentifier: "goToResult", sender: self)
+                                 } else {
+                                    Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                            }
                             default:
                                 print("There was an error")
+                                Alert.basicAlert(on: self, with: "Error", message: "There was an error")
                                 
                         }
                     }
                     else {
-                        //add error alert  box here
-                        print("blank box")
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
             }
         
         //Default is meters
@@ -174,35 +178,37 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
                         switch userWeightUnits {
                             //calculate bmi using feet and kg
                             case "Kg":
-                                let tdee = calculator.tdeeCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                self.view.endEditing(true)
-                                calculator.tdee = String(tdee)
+                                if weightValue.text != "" {
+                                calculator.tdeeCalc(weight: Double(weightValue.text!)!, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
                                 performSegue(withIdentifier: "goToResult", sender: self)
+                                } else {
+                                Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                            }
                             //calculate bmi using feet and Stone
                             case "Stone":
-                                if stoneValue.text == "" {
-                                    stoneValue.text = "0"
-                                }
+                                if weightValue.text != "" && stoneValue.text != "" {
                                 let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                self.view.endEditing(true)
-                                calculator.tdee = String(tdee)
+                                calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
                                 performSegue(withIdentifier: "goToResult", sender: self)
+                                } else {
+                                 Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                            }
                             //calculate bmi using feet and lbs
                             case "Lbs":
+                                if weightValue.text != "" {
                                 let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
-                                let tdee = calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
-                                self.view.endEditing(true)
-                                calculator.tdee = String(tdee)
+                                calculator.tdeeCalc(weight: weightInKg, height: heightInCm, age: ageDouble!, gender: gender!, multiplyer: multiplyer)
                                 performSegue(withIdentifier: "goToResult", sender: self)
+                                } else {
+                                    Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                            }
                             default:
-                                print("There was an error")
+                                Alert.basicAlert(on: self, with: "Error", message: "There was an error with the values given")
                                 
                         }
                     }
                     else {
-                        //add error alert  box here
-                        print("blank box")
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
             }
             
 
@@ -228,7 +234,7 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
             let destinationVC = segue.destination as! ResultsViewController
-            destinationVC.results = calculator.tdee
+            destinationVC.results = calculator.result
         }
     }
     

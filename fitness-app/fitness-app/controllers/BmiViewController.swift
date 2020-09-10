@@ -13,6 +13,7 @@ class BmiViewController: UIViewController {
     let converter = Converter()
     var calculator = Calculator()
     
+    @IBOutlet weak var titleBackgroundView: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var heightUnits: UISegmentedControl!
     @IBOutlet weak var weightUnits: UISegmentedControl!
@@ -31,6 +32,10 @@ class BmiViewController: UIViewController {
         super.viewDidLoad()
         uiChanges()
         viewDefaults()
+        
+        titleBackgroundView.layer.cornerRadius = 10
+        titleBackgroundView.layer.backgroundColor = #colorLiteral(red: 0.9080615044, green: 0.8000728488, blue: 0.4343448877, alpha: 1)
+        
         let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tapGesture)
         
@@ -39,88 +44,9 @@ class BmiViewController: UIViewController {
     
     
     
-    
-    
-    
     @IBAction func calculatePressed(_ sender: UIButton) {
-        
-        let userWeightUnits =  weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex)
-        let userHeightUnits = heightUnits.titleForSegment(at: heightUnits.selectedSegmentIndex)
-        
-        //calculate bmi for different unit options
-        switch userHeightUnits {
-                case "Feet":
-                    if (heightValue.text != "") && (ftValue.text != "") {
-                        let heightInMeters = converter.ftToMeters(ftVlaue: Double(heightValue.text!)!, inchesValue: Double(ftValue.text!)!)
-                        switch userWeightUnits {
-                            //calculate bmi using feet and kg
-                            case "Kg":
-                                let bmi = calculator.bmiCalc(weight: Double(weightValue.text!)!, height: Double(heightInMeters))
-                                self.view.endEditing(true)
-                                calculator.bmi = String(bmi)
-                                performSegue(withIdentifier: "goToResult", sender: self)
-                            //calculate bmi using feet and Stone
-                            case "Stone":
-                                let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                                let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters)
-                                self.view.endEditing(true)
-                                calculator.bmi = String(bmi)
-                                performSegue(withIdentifier: "goToResult", sender: self)
-                            //calculate bmi using feet and lbs
-                            case "Lbs":
-                                let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
-                                let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters)
-                                self.view.endEditing(true)
-                                calculator.bmi = String(bmi)
-                                performSegue(withIdentifier: "goToResult", sender: self)
-                            default:
-                                print("There was an error")
-                                
-                        }
-                    }
-                    else {
-                        //add error alert  box here
-                        print("blank box")
-            }
-        
-        //Default is meters
-        default:
-            if (heightValue.text != "") {
-            let heightInMeters = Double(heightValue.text!)
-            switch userWeightUnits {
-                //calculate bmi using meters and kg
-                case "Kg":
-                    let bmi = calculator.bmiCalc(weight: Double(weightValue.text!)!, height: heightInMeters!)
-                    self.view.endEditing(true)
-                    calculator.bmi = String(bmi)
-                    performSegue(withIdentifier: "goToResult", sender: self)
-                //calculate bmi using meters and Stone
-                case "Stone":
-                    let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
-                    let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters!)
-                    self.view.endEditing(true)
-                    calculator.bmi = String(bmi)
-                    performSegue(withIdentifier: "goToResult", sender: self)
-                //calculate bmi using meters and lbs
-                case "Lbs":
-                    let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
-                    let bmi = calculator.bmiCalc(weight: weightInKg, height: heightInMeters!)
-                    self.view.endEditing(true)
-                    calculator.bmi = String(bmi)
-                    performSegue(withIdentifier: "goToResult", sender: self)
-                default:
-                    print("There was an error")
-            }
-            }
-            else {
-                //add error alert  box here
-                print("blank box")
-            }
-            
-
-        }
-    
-    }//end of calculateButtonPressed
+        getBmi()
+    }
     
     
     
@@ -157,7 +83,7 @@ class BmiViewController: UIViewController {
             stoneValueLabel.isHidden = false
             stoneValue.isHidden = false
             stoneValue.text = ""
-            stoneValue.placeholder = "3"
+            stoneValue.placeholder = "eg. 3"
             weightUnitsLabel.text = "Lbs"
         }
         else if weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex) == "Lbs" {
@@ -176,13 +102,106 @@ class BmiViewController: UIViewController {
         }
     }
     
+    //MARK:- units switch
+    fileprivate func getBmi() {
+        
+        let userWeightUnits =  weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex)
+        let userHeightUnits = heightUnits.titleForSegment(at: heightUnits.selectedSegmentIndex)
+        
+        switch userHeightUnits {
+        case "Feet":
+            if (heightValue.text != "") && (ftValue.text != "") {
+                let heightInMeters = converter.ftToMeters(ftVlaue: Double(heightValue.text!)!, inchesValue: Double(ftValue.text!)!)
+                switch userWeightUnits {
+                    //calculate bmi using feet and kg
+                    case "Kg":
+                        if weightValue.text != "" {
+                            calculator.bmiCalc(weight: Double(weightValue.text!)!, height: Double(heightInMeters))
+                            performSegue(withIdentifier: "goToResult", sender: self)
+                    } else {
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                    }
+                    //calculate bmi using feet and Stone
+                    case "Stone":
+                        if weightValue.text != "" && stoneValue.text != "" {
+                            let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
+                            calculator.bmiCalc(weight: weightInKg, height: heightInMeters)
+                            performSegue(withIdentifier: "goToResult", sender: self)
+                        
+                    } else {
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                    }
+                    //calculate bmi using feet and lbs
+                    case "Lbs":
+                        if weightValue.text != "" {
+                            let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
+                            calculator.bmiCalc(weight: weightInKg, height: heightInMeters)
+                            performSegue(withIdentifier: "goToResult", sender: self)
+                    } else {
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                    }
+                    default:
+                        Alert.basicAlert(on: self, with: "Error", message: "There was an error with the values given")
+                }
+            }
+            else {
+                //add error alert  box here
+                Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+            }
+        //Default is meters
+        default:
+            if (heightValue.text != "") {
+                let heightInMeters = Double(heightValue.text!)
+                switch userWeightUnits {
+                //calculate bmi using meters and kg
+                case "Kg":
+                    if weightValue.text != "" {
+                          calculator.bmiCalc(weight: Double(weightValue.text!)!, height: heightInMeters!)
+                          performSegue(withIdentifier: "goToResult", sender: self)
+                    } else {
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                    }
+                    
+                //calculate bmi using meters and Stone
+                case "Stone":
+                    if weightValue.text != "" && stoneValue.text != "" {
+                        let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
+                        calculator.bmiCalc(weight: weightInKg, height: heightInMeters!)
+                        performSegue(withIdentifier: "goToResult", sender: self)
+                    } else {
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                    }
+                    
+                //calculate bmi using meters and lbs
+                case "Lbs":
+                    if weightValue.text != "" {
+                        let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
+                        calculator.bmiCalc(weight: weightInKg, height: heightInMeters!)
+                        performSegue(withIdentifier: "goToResult", sender: self)
+                    } else {
+                        Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+                    }
+                    
+                default:
+                    Alert.basicAlert(on: self, with: "Error", message: "There was an error with the values given")
+                }
+            }
+            else {
+                //add error alert  box here
+                Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
+            }
+            
+            
+        }
+    }
+    
     
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
             let destinationVC = segue.destination as! ResultsViewController
-            destinationVC.results = calculator.bmi
+            destinationVC.results = calculator.result
         }
     }
     

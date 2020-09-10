@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AA14CBAE2505083E006E07D5 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA14CBAD2505083E006E07D5 /* Calculator.swift */; };
+		AA49DC572507778E000333BF /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49DC562507778E000333BF /* TabBarViewController.swift */; };
+		AA49DC5925078435000333BF /* alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49DC5825078435000333BF /* alerts.swift */; };
+		AA49DC5B25078F85000333BF /* BMI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49DC5A25078F85000333BF /* BMI.swift */; };
+		AA49DC5D25078F8E000333BF /* BMR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49DC5C25078F8E000333BF /* BMR.swift */; };
+		AA49DC5F25078F97000333BF /* TDEE.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49DC5E25078F97000333BF /* TDEE.swift */; };
+		AA49DC622508E8F7000333BF /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA49DC612508E8F7000333BF /* Results.swift */; };
 		AA7251A225042F5C001C2138 /* BmrViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7251A125042F5C001C2138 /* BmrViewController.swift */; };
 		AA7251A72504306B001C2138 /* TdeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7251A62504306B001C2138 /* TdeeViewController.swift */; };
 		AA8AA6D225054D6B009E7054 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA8AA6D125054D6B009E7054 /* ResultsViewController.swift */; };
@@ -22,6 +28,12 @@
 
 /* Begin PBXFileReference section */
 		AA14CBAD2505083E006E07D5 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		AA49DC562507778E000333BF /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		AA49DC5825078435000333BF /* alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = alerts.swift; sourceTree = "<group>"; };
+		AA49DC5A25078F85000333BF /* BMI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMI.swift; sourceTree = "<group>"; };
+		AA49DC5C25078F8E000333BF /* BMR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BMR.swift; sourceTree = "<group>"; };
+		AA49DC5E25078F97000333BF /* TDEE.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDEE.swift; sourceTree = "<group>"; };
+		AA49DC612508E8F7000333BF /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		AA7251A125042F5C001C2138 /* BmrViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BmrViewController.swift; sourceTree = "<group>"; };
 		AA7251A62504306B001C2138 /* TdeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TdeeViewController.swift; sourceTree = "<group>"; };
 		AA8AA6D125054D6B009E7054 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +59,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA49DC6025078F9B000333BF /* results */ = {
+			isa = PBXGroup;
+			children = (
+				AA49DC5A25078F85000333BF /* BMI.swift */,
+				AA49DC5C25078F8E000333BF /* BMR.swift */,
+				AA49DC5E25078F97000333BF /* TDEE.swift */,
+				AA49DC612508E8F7000333BF /* Results.swift */,
+			);
+			path = results;
+			sourceTree = "<group>";
+		};
 		AA7251A325042F65001C2138 /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +84,8 @@
 			children = (
 				AACD530424E987E500B49C08 /* Converter.swift */,
 				AA14CBAD2505083E006E07D5 /* Calculator.swift */,
+				AA49DC5825078435000333BF /* alerts.swift */,
+				AA49DC6025078F9B000333BF /* results */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -72,6 +97,7 @@
 				AA7251A125042F5C001C2138 /* BmrViewController.swift */,
 				AA7251A62504306B001C2138 /* TdeeViewController.swift */,
 				AA8AA6D125054D6B009E7054 /* ResultsViewController.swift */,
+				AA49DC562507778E000333BF /* TabBarViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -179,9 +205,15 @@
 			files = (
 				AA7251A72504306B001C2138 /* TdeeViewController.swift in Sources */,
 				AACD530524E987E500B49C08 /* Converter.swift in Sources */,
+				AA49DC622508E8F7000333BF /* Results.swift in Sources */,
+				AA49DC5925078435000333BF /* alerts.swift in Sources */,
 				AA14CBAE2505083E006E07D5 /* Calculator.swift in Sources */,
 				AACD52F524E960E900B49C08 /* BmiViewController.swift in Sources */,
+				AA49DC5D25078F8E000333BF /* BMR.swift in Sources */,
+				AA49DC5B25078F85000333BF /* BMI.swift in Sources */,
+				AA49DC572507778E000333BF /* TabBarViewController.swift in Sources */,
 				AACD52F124E960E900B49C08 /* AppDelegate.swift in Sources */,
+				AA49DC5F25078F97000333BF /* TDEE.swift in Sources */,
 				AA7251A225042F5C001C2138 /* BmrViewController.swift in Sources */,
 				AACD52F324E960E900B49C08 /* SceneDelegate.swift in Sources */,
 				AA8AA6D225054D6B009E7054 /* ResultsViewController.swift in Sources */,
