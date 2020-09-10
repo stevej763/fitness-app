@@ -10,6 +10,7 @@ import UIKit
 
 class ResultsViewController: UIViewController {
 
+    @IBOutlet weak var senderTitleLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var resultsBackgroundView: UIView!
     @IBOutlet weak var senderLabel: UILabel!
@@ -19,6 +20,18 @@ class ResultsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        if results?.sender == K.Bmi.Sender {
+            senderTitleLabel.text = K.Bmi.ResultTitle
+        } else if results?.sender == K.Bmr.Sender {
+            senderTitleLabel.text = K.Bmr.ResultTitle
+        } else if results?.sender == K.Tdee.Sender {
+            senderTitleLabel.text = K.Tdee.ResultTitle
+        }
+        
+        
+        
         resultLabel.text = results?.value
         senderLabel.text = results?.sender
         adviceLabel.text = results?.advice

@@ -29,6 +29,11 @@ class BmiViewController: UIViewController {
     
     
     override func viewDidLoad() {
+        
+        heightValue.text = "1.83"
+        weightValue.text = "80"
+        
+        
         super.viewDidLoad()
         uiChanges()
         viewDefaults()

@@ -18,15 +18,15 @@ struct Calculator{
     
     if bmiValue < 18.5 {
         //bmi = BMI(value: String(format: "%.1f", bmiValue), advice: "Eat more Pies!", colour: UIColor.blue)
-        result = Results(sender: "bmi", value: String(format: "%.1f", bmiValue), advice: "Eat more", colour: UIColor.blue)
+        result = Results(sender: K.Bmi.Sender, value: String(format: "%.1f", bmiValue), advice: "Eat more", colour: UIColor.blue)
     }
     else if bmiValue < 24.9 {
         //bmi = BMI(value: String(format: "%.1f", bmiValue), advice: "Fit as a Pie!", colour: UIColor.green)
-        result = Results(sender: "bmi", value: String(format: "%.1f", bmiValue), advice: "Good Job!", colour: UIColor.green)
+        result = Results(sender: K.Bmi.Sender, value: String(format: "%.1f", bmiValue), advice: "Good Job!", colour: UIColor.green)
     }
     else {
         //bmi = BMI(value: String(format: "%.1f", bmiValue), advice: "Eat less Pies!", colour: UIColor.red)
-        result = Results(sender: "bmi", value: String(format: "%.1f", bmiValue), advice: "Fatty!", colour: UIColor.red)
+        result = Results(sender: K.Bmi.Sender, value: String(format: "%.1f", bmiValue), advice: "Fatty!", colour: UIColor.red)
     }
         
         
@@ -36,13 +36,13 @@ struct Calculator{
     mutating func bmrCalc(weight:Double, height:Double, age:Double, gender: String) {
         if gender == "Male" {
             let bmrValue = round((10*weight) + (6.25*height) - (5*age) + 5)
-            result = Results(sender: "bmr", value: String(format: "%.0f", bmrValue), advice: "This is how much your body needs", colour: UIColor.blue)
+            result = Results(sender: K.Bmr.Sender, value: String(format: "%.0f", bmrValue), advice: "This is how much your body needs", colour: UIColor.blue)
             //bmr = BMR(value: String(format: "%.0f", bmrValue), advice: "This is how much your body needs", colour: UIColor.blue)
             
             
         }else {
             let bmrValue = round((10*weight) + (6.25*height) - (5*age) - 161)
-            result = Results(sender: "bmr", value: String(format: "%.0f", bmrValue), advice: "This is how much your body needs", colour: UIColor.blue)
+            result = Results(sender: K.Bmr.Sender, value: String(format: "%.0f", bmrValue), advice: "This is how much your body needs", colour: UIColor.blue)
             //bmr = BMR(value: String(format: "%.1f", bmrValue), advice: "This is how much your body needs", colour: UIColor.blue)
            
         }
@@ -55,13 +55,13 @@ struct Calculator{
         if gender == "Male" {
             let bmr = (10*weight) + (6.25*height) - (5*age) + 5
             let tdee = round(bmr*multiplyer)
-            result = Results(sender: "tdee", value: String(format: "%.0f", tdee), advice: "Fast Boi", colour: UIColor.blue)
+            result = Results(sender: K.Tdee.Sender, value: String(format: "%.0f", tdee), advice: "Fast Boi", colour: UIColor.blue)
 
             
         } else {
             let bmr = (10*weight) + (6.25*height) - (5*age) - 161
             let tdee = round(bmr*multiplyer)
-            result = Results(sender: "tdee", value: String(format: "%.0f", tdee), advice: "Fast Boi", colour: UIColor.blue)
+            result = Results(sender: K.Tdee.Sender, value: String(format: "%.0f", tdee), advice: "Fast Boi", colour: UIColor.blue)
 
         }
         
