@@ -12,47 +12,37 @@ class ResultsViewController: UIViewController {
 
     @IBOutlet weak var senderTitleLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
-    @IBOutlet weak var resultsBackgroundView: UIView!
-    @IBOutlet weak var senderLabel: UILabel!
     @IBOutlet weak var adviceLabel: UILabel!
+    @IBOutlet weak var recalculateButton: UIButton!
     
     var results: Results?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        recalculateButton.layer.cornerRadius = 10
         
         
-        if results?.sender == K.Bmi.Sender {
-            senderTitleLabel.text = K.Bmi.ResultTitle
-        } else if results?.sender == K.Bmr.Sender {
-            senderTitleLabel.text = K.Bmr.ResultTitle
-        } else if results?.sender == K.Tdee.Sender {
-            senderTitleLabel.text = K.Tdee.ResultTitle
+        if results?.sender == K.Bmi.sender {
+            senderTitleLabel.text = K.Bmi.resultTitle
+        } else if results?.sender == K.Bmr.sender {
+            senderTitleLabel.text = K.Bmr.resultTitle
+        } else if results?.sender == K.Tdee.sender {
+            senderTitleLabel.text = K.Tdee.resultTitle
         }
         
         
         
         resultLabel.text = results?.value
-        senderLabel.text = results?.sender
+        resultLabel.textColor = results?.colour
         adviceLabel.text = results?.advice
         
-        resultsBackgroundView.layer.backgroundColor = results?.colour.cgColor
-        
-        resultsBackgroundView.layer.borderWidth = 5
-        resultsBackgroundView.layer.borderColor = UIColor(named: "text-input")?.cgColor
-        resultsBackgroundView.layer.cornerRadius = 10
-        // Do any additional setup after loading the view.
+
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func recalculatePressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
-    */
-
+    @IBAction func tabPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }

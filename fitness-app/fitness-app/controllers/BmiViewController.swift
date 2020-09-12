@@ -29,37 +29,16 @@ class BmiViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
-        heightValue.text = "1.83"
-        weightValue.text = "80"
-        
-        
         super.viewDidLoad()
-        uiChanges()
         viewDefaults()
-        
-        titleBackgroundView.layer.cornerRadius = 10
-        titleBackgroundView.layer.backgroundColor = #colorLiteral(red: 0.9080615044, green: 0.8000728488, blue: 0.4343448877, alpha: 1)
-        
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tapGesture)
-        
+        hideKeyboardOnTap(view: self.view)
     }
-    
     
     
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         getBmi()
     }
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 //MARK:- changing units
@@ -80,7 +59,6 @@ class BmiViewController: UIViewController {
             heightUnitsLabel.text = heightUnits.titleForSegment(at: heightUnits.selectedSegmentIndex)
         }
     }
-    
     @IBAction func weightUnitsChanged(_ sender: UISegmentedControl) {
         if weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex) == "Stone" {
             weightValue.placeholder = "e.g. 11"
@@ -108,7 +86,7 @@ class BmiViewController: UIViewController {
     }
     
     //MARK:- units switch
-    fileprivate func getBmi() {
+    fileprivate func getBmi(){
         
         let userWeightUnits =  weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex)
         let userHeightUnits = heightUnits.titleForSegment(at: heightUnits.selectedSegmentIndex)
@@ -118,7 +96,6 @@ class BmiViewController: UIViewController {
             if (heightValue.text != "") && (ftValue.text != "") {
                 let heightInMeters = converter.ftToMeters(ftVlaue: Double(heightValue.text!)!, inchesValue: Double(ftValue.text!)!)
                 switch userWeightUnits {
-                    //calculate bmi using feet and kg
                     case "Kg":
                         if weightValue.text != "" {
                             calculator.bmiCalc(weight: Double(weightValue.text!)!, height: Double(heightInMeters))
@@ -126,7 +103,6 @@ class BmiViewController: UIViewController {
                     } else {
                         Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
                     }
-                    //calculate bmi using feet and Stone
                     case "Stone":
                         if weightValue.text != "" && stoneValue.text != "" {
                             let weightInKg = converter.convertToKg(valueToConvert: converter.stoneToLb(stoneValue: Double(weightValue.text!)!, lbValue: Double(stoneValue.text!)!))
@@ -136,7 +112,6 @@ class BmiViewController: UIViewController {
                     } else {
                         Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
                     }
-                    //calculate bmi using feet and lbs
                     case "Lbs":
                         if weightValue.text != "" {
                             let weightInKg = converter.convertToKg(valueToConvert: Double(weightValue.text!)!)
@@ -150,7 +125,6 @@ class BmiViewController: UIViewController {
                 }
             }
             else {
-                //add error alert  box here
                 Alert.basicAlert(on: self, with: "Blank box", message: "Make sure all boxes are filled")
             }
         //Default is meters
@@ -202,7 +176,7 @@ class BmiViewController: UIViewController {
     
     
     
-    
+    //pass result to result view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
             let destinationVC = segue.destination as! ResultsViewController
@@ -211,16 +185,11 @@ class BmiViewController: UIViewController {
     }
     
     
-    
-    fileprivate func uiChanges() {
-        // Do any additional setup after loading the view.
+    //MARK:- viewDidLoad methods
+    fileprivate func viewDefaults() {
         self.view.backgroundColor = UIColor(named: "blue1")
         calculate.layer.cornerRadius = 10
-    }
-    
-    
-    
-    fileprivate func viewDefaults() {
+        titleBackgroundView.layer.cornerRadius = 10
         heightValue.placeholder = "e.g. 1.80"
         weightValue.placeholder = "e.g. 75.5"
         stoneValueLabel.isHidden = true
@@ -231,6 +200,10 @@ class BmiViewController: UIViewController {
         weightUnitsLabel.text = weightUnits.titleForSegment(at: weightUnits.selectedSegmentIndex)
     }
     
+//    fileprivate func hideKeyboardOnTap() {
+//        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+//        view.addGestureRecognizer(tapGesture)
+//    }
     
     
 }

@@ -8,10 +8,10 @@
 
 import UIKit
 
-class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class TdeeViewController: UIViewController {
    
     let converter = Converter()
-    var calculator = Calculator()
+    private var calculator = Calculator()
     
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -23,7 +23,6 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     @IBOutlet weak var heightValue: UITextField!
     @IBOutlet weak var ftValue: UITextField!
     @IBOutlet weak var ftValueLabel: UILabel!
-    
     @IBOutlet weak var weightUnitsSelector: UISegmentedControl!
     @IBOutlet weak var weightUnitsLabel: UILabel!
     @IBOutlet weak var weightValue: UITextField!
@@ -35,21 +34,16 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     @IBOutlet weak var calculateButton: UIButton!
     
-    let activityOptions = ["Sedentry - no exercise", "Exercise 1-3 days a week", "Exercise 3-5 days a week", "Exercise 6-7 days a week", "Twice a day, every day"]
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleBackgroundView.layer.cornerRadius = 10
-        calculateButton.layer.cornerRadius = 10
-        activityLevelPicker.layer.cornerRadius = 10
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tapGesture)
-       
+        hideKeyboardOnTap(view: self.view)
+        viewDefaults()
         self.activityLevelPicker.dataSource = self
         self.activityLevelPicker.delegate = self
-        
-        viewDefaults()
+
     }
     
     
@@ -216,18 +210,7 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     }
     
     
-    //MARK:- picker methods
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-       }
-       
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return activityOptions.count
-       }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return activityOptions[row]
-    }
+  
     
     
     
@@ -240,6 +223,9 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
     
     
     fileprivate func viewDefaults() {
+        titleBackgroundView.layer.cornerRadius = 10
+        calculateButton.layer.cornerRadius = 10
+        activityLevelPicker.layer.cornerRadius = 10
         self.view.backgroundColor = UIColor(named: "blue3")
         activityLevelPicker.selectRow(1, inComponent: 0, animated: true)
         heightValue.placeholder = "e.g. 1.80"
@@ -248,10 +234,28 @@ class TdeeViewController: UIViewController, UIPickerViewDataSource, UIPickerView
         stoneValue.isHidden = true
         ftValueLabel.isHidden = true
         ftValue.isHidden = true
-
         heightUnitsLabel.text = heightUnitsSelector.titleForSegment(at: heightUnitsSelector.selectedSegmentIndex)
         weightUnitsLabel.text = weightUnitsSelector.titleForSegment(at: weightUnitsSelector.selectedSegmentIndex)
     }
 
 
+}
+
+
+//MARK:- picker methods
+extension TdeeViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    
+    
+      func numberOfComponents(in pickerView: UIPickerView) -> Int {
+          return 1
+         }
+         
+      func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return K.activityOptions.count
+         }
+      
+      func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return K.activityOptions[row]
+      }
 }

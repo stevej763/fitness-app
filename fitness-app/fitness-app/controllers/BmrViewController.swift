@@ -37,16 +37,8 @@ class BmrViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: "blue2")
         viewDefaults()
-        
-        
-        calculateButton.layer.cornerRadius = 10
-        titleBackgroundView.layer.cornerRadius = 10
-        
-        
-        let tapGesture = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tapGesture)
+        hideKeyboardOnTap(view: self.view)
     }
     
 
@@ -210,13 +202,16 @@ class BmrViewController: UIViewController {
     
     
     fileprivate func viewDefaults() {
+        
+        self.view.backgroundColor = UIColor(named: "blue2")
+        calculateButton.layer.cornerRadius = 10
+        titleBackgroundView.layer.cornerRadius = 10
         heightValue.placeholder = "e.g. 1.80"
         weightValue.placeholder = "e.g. 75.5"
         stoneValueLabel.isHidden = true
         stoneValue.isHidden = true
         ftValueLabel.isHidden = true
         ftValue.isHidden = true
-
         heightUnitsLabel.text = heightUnitsSelector.titleForSegment(at: heightUnitsSelector.selectedSegmentIndex)
         weightUnitsLabel.text = weightUnitsSelector.titleForSegment(at: weightUnitsSelector.selectedSegmentIndex)
     }
